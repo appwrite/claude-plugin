@@ -1,0 +1,31 @@
+{
+    "name": "appwrite",
+    "owner": {
+        "name": "Appwrite",
+        "email": "team@appwrite.io"
+    },
+    "metadata": {
+        "description": "Appwrite plugin marketplace for Claude Code.",
+        "version": "0.1.0"
+    },
+    "plugins": [
+        {
+            "name": "appwrite",
+            "source": "./",
+            "description": "Appwrite tools for Claude Code, including SDK skills, Appwrite MCP servers, and deployment commands.",
+            "author": {
+                "name": "Appwrite",
+                "email": "team@appwrite.io"
+            },
+            "homepage": "https://appwrite.io/docs/tooling/ai/ai-dev-tools/claude-code",
+            "repository": "https://github.com/appwrite/claude-plugin",
+            "license": "MIT",
+            "keywords": [
+                "appwrite",
+                "claude-code",
+                "mcp",
+                "skills"
+            ]
+        }
+    ]
+}
