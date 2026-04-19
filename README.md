@@ -30,6 +30,8 @@ skills/                      # Claude Code skills (per language)
 │   └── SKILL.md
 ├── go/
 │   └── SKILL.md
+├── rust/
+│   └── SKILL.md
 ├── dotnet/
 │   └── SKILL.md
 ├── cli/
@@ -50,6 +52,7 @@ commands/                    # Manual commands with side effects
 - `/appwrite:python`
 - `/appwrite:ruby`
 - `/appwrite:go`
+- `/appwrite:rust`
 - `/appwrite:dotnet`
 - `/appwrite:cli`
 
