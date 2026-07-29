@@ -411,4 +411,3 @@ match users.get("[USER_ID]").await {
 - Convert queries with `.to_string()` before passing them to APIs that expect `Option<Vec<String>>`.
 - Use `serde_json::json!({...})` for row data and JSON bodies.
 - Use `InputFile::from_path(...).await?` or `InputFile::from_bytes(...)` for uploads.
-

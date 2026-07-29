@@ -119,3 +119,21 @@ appwrite push sites --site-id <SITE_ID> --force
 | `appwrite sites create-variable --site-id <ID> --key <KEY> --value <VALUE>` | Create a variable |
 | `appwrite sites update-variable --site-id <ID> --variable-id <ID> --key <KEY> --value <VALUE>` | Update a variable |
 | `appwrite sites delete-variable --site-id <ID> --variable-id <ID>` | Delete a variable |
+
+Variables are accessible during build and runtime (server-side rendering) as environment variables.
+
+## Logs
+
+| Command | Description |
+|---------|-------------|
+| `appwrite sites list-logs --site-id <ID>` | List site request logs |
+| `appwrite sites get-log --site-id <ID> --log-id <ID>` | Get a specific log |
+| `appwrite sites delete-log --site-id <ID> --log-id <ID>` | Delete a log |
+
+## Templates
+
+| Command | Description |
+|---------|-------------|
+| `appwrite sites list-templates` | List available site templates |
+| `appwrite sites get-template --template-id <ID>` | Get template details |
+| `appwrite sites create-template-deployment --site-id <ID>` | Deploy from a template |

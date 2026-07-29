@@ -120,6 +120,35 @@ appwrite push all --all --force
 
 | Command | Description |
 |---------|-------------|
-| `appwrite functions list-executions --function-id <ID>` | List recent executions |
 | `appwrite functions create-execution --function-id <ID>` | Trigger a function execution |
-| `appwrite functions get-execution --function-id <ID> --execution-id <ID>` | Get execution details |
+| `appwrite functions list-executions --function-id <ID>` | List execution logs |
+| `appwrite functions get-execution --function-id <ID> --execution-id <ID>` | Get an execution log |
+
+### Trigger with body
+
+```sh
+appwrite functions create-execution \
+    --function-id <FUNCTION_ID> \
+    --body '{"key": "value"}'
+```
+
+## Environment Variables
+
+| Command | Description |
+|---------|-------------|
+| `appwrite functions list-variables --function-id <ID>` | List all variables |
+| `appwrite functions create-variable --function-id <ID> --key <KEY> --value <VALUE>` | Create a variable |
+| `appwrite functions update-variable --function-id <ID> --variable-id <ID> --key <KEY> --value <VALUE>` | Update a variable |
+| `appwrite functions delete-variable --function-id <ID> --variable-id <ID>` | Delete a variable |
+
+Variables are accessible at runtime as environment variables.
+
+## Local Development
+
+Run your function locally for quick debugging:
+
+```sh
+appwrite run functions
+```
+
+This starts a local development server that watches for file changes and automatically rebuilds.
