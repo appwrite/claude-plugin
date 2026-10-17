@@ -1,18 +1,80 @@
 # Appwrite Claude Code Plugin
 
-![License](https://img.shields.io/github/license/appwrite/claude-plugin.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-0.2.0-blue.svg?style=flat-square)
-[![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
+![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-0.2.0-blue.svg?style=flat-square)
+[![X Account](https://img.shields.io/badge/follow-%40appwrite-000000?logo=x&style=flat-square)](https://x.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 
 Appwrite tools for Claude Code. This plugin packages Appwrite SDK skills, the hosted Appwrite MCP server, and deployment commands in Claude Code's native plugin format.
+
+## Installation
+
+The plugin is listed in Anthropic's official marketplace, which Claude Code adds automatically. Install it from your shell:
+
+```sh
+claude plugin install appwrite@claude-plugins-official
+```
+
+Or from a Claude Code session:
+
+```text
+/plugin install appwrite@claude-plugins-official
+```
+
+To install from this repository instead, add it as a marketplace first:
+
+```text
+/plugin marketplace add appwrite/claude-plugin
+/plugin install appwrite@appwrite
+```
+
+Run `/reload-plugins` to load the plugin in a session that is already open.
+
+## Included skills
+
+- `/appwrite:typescript`
+- `/appwrite:dart`
+- `/appwrite:kotlin`
+- `/appwrite:swift`
+- `/appwrite:php`
+- `/appwrite:python`
+- `/appwrite:ruby`
+- `/appwrite:go`
+- `/appwrite:rust`
+- `/appwrite:dotnet`
+- `/appwrite:cli`
+
+These skills give Claude Code language-specific Appwrite context for authentication, database queries, storage, realtime, functions, and server-side administration. Claude loads them automatically when a task matches, or you can invoke one directly.
+
+## Included commands
+
+- `/appwrite:deploy-site`
+- `/appwrite:deploy-function`
+
+These commands are manual-only, so Claude does not start a deployment on its own.
+
+## Hosted MCP server
+
+The plugin configures one `appwrite` server at `https://mcp.appwrite.io/`. It provides tools for working with your Appwrite organizations and projects, and for searching the latest Appwrite documentation.
+
+The hosted server uses browser-based OAuth, so the plugin does not require an API key, project ID, endpoint, or other manually configured secret. In a Claude Code session, open `/mcp`, select the `appwrite` server, and choose **Authenticate**. From your shell, run:
+
+```sh
+claude mcp login plugin:appwrite:appwrite
+```
+
+After authentication, try:
+
+> Use Appwrite to show my workspace context and list my projects.
+
+If authentication expires, choose **Re-authenticate** from `/mcp` or run the login command again. If the browser does not open, use the URL printed by Claude Code. Run `claude mcp get plugin:appwrite:appwrite` to check the server's authentication and connection status.
 
 ## Structure
 
 ```text
 .claude-plugin/
 ├── plugin.json              # Plugin manifest
-└── marketplace.json         # Marketplace manifest for install-by-name flows
+└── marketplace.json         # Marketplace manifest
 skills/                      # Claude Code skills (per language)
 ├── typescript/
 │   └── SKILL.md
@@ -34,85 +96,46 @@ skills/                      # Claude Code skills (per language)
 │   └── SKILL.md
 ├── dotnet/
 │   └── SKILL.md
-├── cli/
-│   └── SKILL.md
+└── cli/
+    └── SKILL.md
 commands/                    # Manual commands with side effects
 ├── deploy-site.md
 └── deploy-function.md
 .mcp.json                    # Hosted Appwrite MCP server
 ```
 
-## Included Skills
+## Local development
 
-- `/appwrite:typescript`
-- `/appwrite:dart`
-- `/appwrite:kotlin`
-- `/appwrite:swift`
-- `/appwrite:php`
-- `/appwrite:python`
-- `/appwrite:ruby`
-- `/appwrite:go`
-- `/appwrite:rust`
-- `/appwrite:dotnet`
-- `/appwrite:cli`
-
-These skills give Claude Code language-specific Appwrite context for authentication, database queries, storage, realtime, functions, and server-side administration.
-
-## Included Commands
-
-- `/appwrite:deploy-site`
-- `/appwrite:deploy-function`
-
-These commands are marked as manual-only so Claude will not invoke deployment workflows automatically.
-
-## Hosted MCP Server
-
-The plugin configures one `appwrite` server at `https://mcp.appwrite.io/`. It provides tools for working with your Appwrite workspace and projects and for searching the latest Appwrite documentation.
-
-The hosted server uses browser-based OAuth, so the plugin does not require an API key, project ID, endpoint, or other manually configured secret. In an interactive Claude Code session, open `/mcp` and authenticate the `appwrite` plugin server, or run:
+From a clone of this repository, validate the plugin and marketplace:
 
 ```sh
-claude mcp login plugin:appwrite:appwrite
-```
-
-After authentication, try:
-
-> Use Appwrite to show my workspace context and list my projects.
-
-If authentication expires, run `claude mcp login plugin:appwrite:appwrite` again or choose **Re-authenticate** from `/mcp`. If the browser does not open, use the URL printed by Claude Code. Use `claude mcp get plugin:appwrite:appwrite` and `/mcp` to inspect approval, authentication, and connection status.
-
-## Local Development
-
-Validate the generated plugin and marketplace:
-
-```sh
-cd examples/claude-plugin
 claude plugin validate .
 ```
 
-Load the plugin directly for a dev session:
+Load the plugin directly for a development session:
 
 ```sh
-claude --plugin-dir ./examples/claude-plugin
+claude --plugin-dir .
 ```
 
-Then verify:
+Then check that `/help` lists the `appwrite` namespace and that `/appwrite:typescript` loads the TypeScript skill.
 
-- `/help` shows the `appwrite` namespace
-- `/appwrite:typescript` loads the TypeScript skill
-
-Install it end to end through the bundled marketplace:
+To test the install-by-name flow, add the clone as a local marketplace:
 
 ```sh
-claude plugin marketplace add ./examples/claude-plugin --scope local
+claude plugin marketplace add ./ --scope local
 claude plugin install appwrite@appwrite --scope local
 ```
 
-Use `--plugin-dir` for fast iteration on skills and commands. Use the bundled marketplace when you want install-by-name flows such as `appwrite@appwrite`.
+## Learn more
+
+- [Appwrite in Claude Code](https://appwrite.io/docs/tooling/ai/agents/claude-code)
+- [Appwrite MCP server](https://appwrite.io/docs/tooling/ai/mcp-servers)
+- [Claude Code plugins documentation](https://code.claude.com/docs/en/discover-plugins)
 
 ## Contribution
 
-This library is auto-generated by Appwrite custom [SDK Generator](https://github.com/appwrite/sdk-generator). To learn more about how you can help us improve this SDK, please check the [contribution guide](https://github.com/appwrite/sdk-generator/blob/master/CONTRIBUTING.md) before sending a pull-request.
+This library is auto-generated by Appwrite custom [SDK Generator](https://github.com/appwrite/sdk-generator). To learn more about how you can help us improve this SDK, please check the [contribution guide](https://github.com/appwrite/sdk-generator/blob/main/CONTRIBUTING.md) before sending a pull-request.
 
 ## License
 
