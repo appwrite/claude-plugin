@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.1
+
+* Fixed: the Rust skill shows aggregation, grouping, join and query builder examples like the other SDK skills
+* Fixed: the Rust skill no longer pins `appwrite = "0.3.0"`, which predates those query APIs
+
 ## 0.3.0
 
 * Updated: Rewrote the CLI skill as guidance rather than a command catalog, deferring flags to `appwrite <command> --help`
