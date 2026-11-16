@@ -48,18 +48,18 @@ These skills give Claude Code language-specific Appwrite context for authenticat
 
 ## Code review skills
 
-These skills work with Hansi, the reviewer behind Appwrite Review, on GitHub pull requests.
+These skills work with Appwrite Review, which reviews GitHub pull requests and grades them from **S** to **F**.
 
 | Skill | What it does |
 | --- | --- |
-| `/appwrite:hansi-status` | Read the current tier, open findings, and filtered-out comments. Does not start a review. |
-| `/appwrite:hansi-loop` | Fix the pull request until Hansi grades it **Tier S** and no comments are left open. |
-| `/appwrite:hansi-learn` | Reply on a finding with a lasting rule so Hansi remembers it. |
-| `/appwrite:hansi-setup` | Write `.hansi.json` and open a pull request onto the base branch. |
+| `/appwrite:review-status` | Read the current tier, open findings, and filtered-out comments. Does not start a review. |
+| `/appwrite:review-loop` | Fix the pull request until Appwrite Review grades it **Tier S** and no comments are left open. |
+| `/appwrite:review-learn` | Reply on a finding with a lasting rule so Appwrite Review remembers it. |
+| `/appwrite:review-setup` | Write `.hansi.json` and open a pull request onto the base branch. |
 
-`hansi-threads` is not invoked directly: it keeps Claude from resolving Hansi's review threads, which Hansi clears itself after a fix or a dismissal.
+`review-threads` is not invoked directly: it keeps Claude from resolving review threads that Appwrite Review clears itself after a fix or a dismissal.
 
-The review skills need Appwrite Review set up on the repository (Console → your project → Review) and a way to talk to GitHub; the examples use the GitHub CLI. Each review counts toward the project's review usage, and `hansi-loop` stops after 5 iterations.
+The review skills need Appwrite Review set up on the repository (Console → your project → Review) and a way to talk to GitHub; the examples use the GitHub CLI. Each review counts toward the project's review usage, and `review-loop` stops after 5 iterations.
 
 ## Included commands
 
@@ -113,15 +113,15 @@ skills/                      # Claude Code skills (per language)
 │   └── SKILL.md
 ├── cli/
 │   └── SKILL.md
-├── hansi-status/            # Code review skills (Hansi)
+├── review-status/            # Code review skills
 │   └── SKILL.md
-├── hansi-loop/
+├── review-loop/
 │   └── SKILL.md
-├── hansi-learn/
+├── review-learn/
 │   └── SKILL.md
-├── hansi-setup/
+├── review-setup/
 │   └── SKILL.md
-└── hansi-threads/
+└── review-threads/
     └── SKILL.md
 commands/                    # Manual commands with side effects
 ├── deploy-site.md
