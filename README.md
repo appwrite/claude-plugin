@@ -46,6 +46,21 @@ Run `/reload-plugins` to load the plugin in a session that is already open.
 
 These skills give Claude Code language-specific Appwrite context for authentication, database queries, storage, realtime, functions, and server-side administration. Claude loads them automatically when a task matches, or you can invoke one directly.
 
+## Code review skills
+
+These skills work with Hansi, the reviewer behind Appwrite Review, on GitHub pull requests.
+
+| Skill | What it does |
+| --- | --- |
+| `/appwrite:hansi-status` | Read the current tier, open findings, and filtered-out comments. Does not start a review. |
+| `/appwrite:hansi-loop` | Fix the pull request until Hansi grades it **Tier S** and no comments are left open. |
+| `/appwrite:hansi-learn` | Reply on a finding with a lasting rule so Hansi remembers it. |
+| `/appwrite:hansi-setup` | Write `.hansi.json` and open a pull request onto the base branch. |
+
+`hansi-threads` is not invoked directly: it keeps Claude from resolving Hansi's review threads, which Hansi clears itself after a fix or a dismissal.
+
+The review skills need Appwrite Review set up on the repository (Console → your project → Review) and a way to talk to GitHub; the examples use the GitHub CLI. Each review counts toward the project's review usage, and `hansi-loop` stops after 5 iterations.
+
 ## Included commands
 
 - `/appwrite:deploy-site`
@@ -96,7 +111,17 @@ skills/                      # Claude Code skills (per language)
 │   └── SKILL.md
 ├── dotnet/
 │   └── SKILL.md
-└── cli/
+├── cli/
+│   └── SKILL.md
+├── hansi-status/            # Code review skills (Hansi)
+│   └── SKILL.md
+├── hansi-loop/
+│   └── SKILL.md
+├── hansi-learn/
+│   └── SKILL.md
+├── hansi-setup/
+│   └── SKILL.md
+└── hansi-threads/
     └── SKILL.md
 commands/                    # Manual commands with side effects
 ├── deploy-site.md
