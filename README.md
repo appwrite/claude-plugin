@@ -46,6 +46,21 @@ Run `/reload-plugins` to load the plugin in a session that is already open.
 
 These skills give Claude Code language-specific Appwrite context for authentication, database queries, storage, realtime, functions, and server-side administration. Claude loads them automatically when a task matches, or you can invoke one directly.
 
+## Code review skills
+
+These skills work with Appwrite Review, which reviews GitHub pull requests and grades them from **S** to **F**.
+
+| Skill | What it does |
+| --- | --- |
+| `/appwrite:review-status` | Read the current tier, open findings, and filtered-out comments. Does not start a review. |
+| `/appwrite:review-loop` | Fix the pull request until Appwrite Review grades it **Tier S** and no comments are left open. |
+| `/appwrite:review-learn` | Reply on a finding with a lasting rule so Appwrite Review remembers it. |
+| `/appwrite:review-setup` | Write `.hansi.json` and open a pull request onto the base branch. |
+
+`review-threads` is not invoked directly: it keeps Claude from resolving review threads that Appwrite Review clears itself after a fix or a dismissal.
+
+The review skills need Appwrite Review set up on the repository (Console → your project → Review) and a way to talk to GitHub; the examples use the GitHub CLI. Each review counts toward the project's review usage, and `review-loop` stops after 5 iterations.
+
 ## Included commands
 
 - `/appwrite:deploy-site`
@@ -96,7 +111,17 @@ skills/                      # Claude Code skills (per language)
 │   └── SKILL.md
 ├── dotnet/
 │   └── SKILL.md
-└── cli/
+├── cli/
+│   └── SKILL.md
+├── review-status/            # Code review skills
+│   └── SKILL.md
+├── review-loop/
+│   └── SKILL.md
+├── review-learn/
+│   └── SKILL.md
+├── review-setup/
+│   └── SKILL.md
+└── review-threads/
     └── SKILL.md
 commands/                    # Manual commands with side effects
 ├── deploy-site.md
