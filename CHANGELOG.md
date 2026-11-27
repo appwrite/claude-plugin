@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.4.0
+
+* Added: Appwrite Zero project setup flow (`npx appwrite-cli@latest zero`) across all ten SDK skills, the `cli` skill, and the `deploy-site` and `deploy-function` commands
+* Added: Appwrite Review code review skills (`review-status`, `review-loop`, `review-learn`, `review-setup`, `review-threads`)
+* Added: `push table --prune` safety guidance and `init project` closest-region selection in the `cli` skill
+* Fixed: server SDK skills forward the user agent through a per-request admin client instead of the session client
+
 ## 0.3.1
 
 * Fixed: the Rust skill shows aggregation, grouping, join and query builder examples like the other SDK skills
